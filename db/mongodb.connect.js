@@ -12,4 +12,15 @@ async function connect() {
   }
 }
 
-module.exports = { connect };
+async function closeAndDisconnect() {
+  try {
+    await mongoose.connection.close();
+    await mongoose.disconnect();
+    console.log("Disconnected and closed db connection");
+  } catch(e) {
+    console.error("Unable to close db connection");
+    console.error(e);
+  }
+}
+
+module.exports = { connect, closeAndDisconnect };
